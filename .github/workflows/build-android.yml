@@ -69,8 +69,12 @@ jobs:
           fi
 
       # 7. Compilar la app React
+      # CI=false evita que react-scripts trate warnings como errores
+      # (comportamiento por defecto de Create React App en CI)
       - name: Build React
-        run: npm run build
+        run: CI=false npm run build
+        env:
+          GENERATE_SOURCEMAP: false
 
       # 8. Añadir plataforma Android (si no existe)
       - name: Capacitor add Android

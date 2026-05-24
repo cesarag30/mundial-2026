@@ -20,7 +20,7 @@ import {
   plantillaAgrupada,
   tienePlantillaCompleta,
 } from '../data/squads';
-import { partidosDeEquipo, ETIQUETAS_FASE } from '../data/matches';
+import { partidosDeEquipo } from '../data/matches';
 import './Equipos.css';
 
 const EquipoDetalle: React.FC = () => {

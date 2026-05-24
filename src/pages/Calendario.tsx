@@ -11,7 +11,7 @@ import {
 import { useMemo, useState } from 'react';
 import MatchCard from '../components/MatchCard';
 import UpdateBanner from '../components/UpdateBanner';
-import { partidos, ETIQUETAS_FASE, type Fase } from '../data/matches';
+import { partidos, type Fase } from '../data/matches';
 import './Calendario.css';
 
 type Filtro = 'TODOS' | Fase;
