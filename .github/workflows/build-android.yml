@@ -3,13 +3,12 @@ name: Build Android APK
 # Cuándo se dispara este workflow
 on:
   # Cada vez que empujas a main → genera APK debug
+  # Cuando creas un tag tipo v1.0.0 → genera APK release
   push:
     branches: [main, master]
+    tags: ['v*']
   # Manualmente desde la pestaña "Actions" de GitHub
   workflow_dispatch:
-  # Cuando creas un tag tipo v1.0.0 → genera APK release firmado
-  push_tags:
-    tags: ['v*']
 
 jobs:
   build:
@@ -36,23 +35,38 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
-      # 4. Cachear el SDK de Android para builds más rápidos
+      # 4a. Cachear node_modules (acelera builds posteriores ~3 min)
+      - name: Cache node_modules
+        uses: actions/cache@v4
+        with:
+          path: node_modules
+          key: node-modules-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+          restore-keys: node-modules-${{ runner.os }}-
+
+      # 4b. Cachear Gradle (acelera el build de Android)
       - name: Cache Gradle
         uses: actions/cache@v4
         with:
           path: |
             ~/.gradle/caches
             ~/.gradle/wrapper
-          key: gradle-${{ runner.os }}-${{ hashFiles('**/*.gradle*') }}
+            android/.gradle
+          key: gradle-${{ runner.os }}-${{ hashFiles('android/**/*.gradle*', 'android/gradle/wrapper/gradle-wrapper.properties') }}
           restore-keys: gradle-${{ runner.os }}-
 
       # 5. Instalar SDK de Android (no necesita Android Studio)
       - name: Setup Android SDK
         uses: android-actions/setup-android@v3
 
-      # 6. Instalar dependencias de Node
+      # 6. Instalar dependencias de Node (rápido si hay cache)
       - name: npm install
-        run: npm ci --legacy-peer-deps
+        run: |
+          if [ -d "node_modules" ]; then
+            echo "✓ node_modules viene de cache, solo verifico integridad"
+            npm install --legacy-peer-deps --prefer-offline --no-audit
+          else
+            npm ci --legacy-peer-deps
+          fi
 
       # 7. Compilar la app React
       - name: Build React
