@@ -39,17 +39,15 @@ export interface MarcadorVivo extends Marcador {
 /** Resultado de un fetch: mapa de partidoId -> marcador en vivo */
 export type LiveMarcadores = Record<string, MarcadorVivo>;
 
-/** Mapeo de códigos del API a códigos FIFA internos */
+/**
+ * Mapeo de códigos del API a códigos FIFA internos.
+ * Verificado contra football-data.org el 24-may-2026 con los 48 equipos del Mundial.
+ * Solo se listan los que DIFIEREN del estándar FIFA de 3 letras.
+ */
 const ALIAS_CODIGO: Record<string, string> = {
-  // football-data.org suele usar códigos FIFA estándar de 3 letras,
-  // pero algunos difieren — aquí pueden añadirse correcciones.
-  KOR: 'KOR', JPN: 'JPN', ARG: 'ARG', BRA: 'BRA',
-  ESP: 'ESP', FRA: 'FRA', GER: 'GER', NED: 'NED',
-  POR: 'POR', BEL: 'BEL', CRO: 'CRO', URU: 'URU',
-  MAR: 'MAR', COL: 'COL', MEX: 'MEX', USA: 'USA',
-  CAN: 'CAN', QAT: 'QAT', SUI: 'SUI', AUS: 'AUS',
-  // alias frecuentes
-  NIR: 'GBR', RKS: 'KOS',
+  // football-data.org usa URY (ISO 3166-1 alpha-3) en vez de URU (FIFA)
+  URY: 'URU',
+  // (sigue el mismo patrón para otros si surgen incompatibilidades)
 };
 
 const normaliza = (codigo: string): string =>
