@@ -44,14 +44,16 @@ jobs:
           restore-keys: node-modules-${{ runner.os }}-
 
       # 4b. Cachear Gradle (acelera el build de Android)
+      # NOTA: NO cacheamos android/.gradle porque android/ está en .gitignore
+      # y se regenera cada vez con `npx cap add android`. Cachear android/.gradle
+      # crearía un android/ parcial que confunde el check de Capacitor.
       - name: Cache Gradle
         uses: actions/cache@v4
         with:
           path: |
             ~/.gradle/caches
             ~/.gradle/wrapper
-            android/.gradle
-          key: gradle-${{ runner.os }}-${{ hashFiles('android/**/*.gradle*', 'android/gradle/wrapper/gradle-wrapper.properties') }}
+          key: gradle-${{ runner.os }}-v2
           restore-keys: gradle-${{ runner.os }}-
 
       # 5. Instalar SDK de Android (no necesita Android Studio)
@@ -115,11 +117,20 @@ jobs:
           retention-days: 7
 
       # 8. Añadir plataforma Android (si no existe)
+      # Comprobamos `android/gradlew` específicamente porque puede que exista
+      # un android/ parcial restaurado del cache aunque no esté inicializado.
       - name: Capacitor add Android
         run: |
-          if [ ! -d "android" ]; then
+          if [ ! -f "android/gradlew" ]; then
+            echo "→ Inicializando proyecto Android nativo desde cero..."
+            rm -rf android
             npx cap add android
+          else
+            echo "→ Proyecto Android ya existe"
           fi
+          # Asegurar que gradlew es ejecutable
+          chmod +x android/gradlew
+          ls -la android/gradlew
 
       # 9. Sincronizar assets web → proyecto Android nativo
       - name: Capacitor sync
