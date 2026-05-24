@@ -20,7 +20,19 @@ import type { Marcador } from '../data/matches';
 
 const API_KEY = process.env.REACT_APP_FOOTBALL_API_KEY ?? '';
 const JSON_URL = process.env.REACT_APP_RESULTS_JSON_URL ?? '';
-const FOOTBALL_DATA_BASE = 'https://api.football-data.org/v4';
+
+/**
+ * En desarrollo (`ionic serve`/`npm start`), el dev server de Create React App
+ * actúa como proxy hacia `https://api.football-data.org` (config `proxy` en
+ * package.json). Esto evita CORS porque la petición sale desde el mismo origen
+ * del dev server (localhost:8100 → localhost:8100/v4/... → api.football-data.org).
+ *
+ * En producción (APK con CapacitorHttp), usamos la URL absoluta y el plugin
+ * nativo de Capacitor evita CORS rutando la petición por OkHttp.
+ */
+const FOOTBALL_DATA_BASE = process.env.NODE_ENV === 'development'
+  ? '/v4'                                  // dev → proxy CRA
+  : 'https://api.football-data.org/v4';    // prod → CapacitorHttp nativo
 /** Identificador de competición en football-data.org */
 const COMPETITION_ID = 'WC';
 /** URL del archivo de simulación local (auto-detectado si existe) */
