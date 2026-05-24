@@ -54,7 +54,7 @@ const UpdateBanner: React.FC = () => {
         ) : error ? (
           <>
             <IonIcon icon={warning} />
-            <IonLabel>Error · toca para reintentar</IonLabel>
+            <IonLabel>Error: {error.length > 40 ? error.slice(0, 40) + '…' : error}</IonLabel>
           </>
         ) : (
           <>

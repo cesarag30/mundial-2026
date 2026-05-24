@@ -23,6 +23,16 @@ const config: CapacitorConfig = {
   },
 
   plugins: {
+    /**
+     * CapacitorHttp intercepta fetch() y XMLHttpRequest, los enruta al
+     * stack HTTP nativo de Android/iOS, y por tanto SALTA CORS.
+     * Imprescindible para football-data.org y otras APIs que no envían
+     * cabeceras Access-Control-Allow-Origin.
+     * Solo afecta a builds nativos (APK/IPA) — no a `ionic serve`.
+     */
+    CapacitorHttp: {
+      enabled: true,
+    },
     SplashScreen: {
       launchShowDuration: 2000,
       launchAutoHide: true,
