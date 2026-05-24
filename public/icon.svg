@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Fondo degradado con los colores de los 3 anfitriones -->
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1a237e"/>
+      <stop offset="50%" stop-color="#006847"/>
+      <stop offset="100%" stop-color="#d52b1e"/>
+    </linearGradient>
+    <radialGradient id="ballSheen" cx="35%" cy="35%" r="50%">
+      <stop offset="0%" stop-color="rgba(255,255,255,0.8)"/>
+      <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Fondo redondeado -->
+  <rect width="512" height="512" rx="96" fill="url(#bg)"/>
+
+  <!-- Trofeo arriba -->
+  <g transform="translate(256 130)">
+    <text x="0" y="0" font-size="120" text-anchor="middle" dominant-baseline="middle">🏆</text>
+  </g>
+
+  <!-- Balón de fútbol grande en el centro -->
+  <g transform="translate(256 320)">
+    <circle r="100" fill="white"/>
+    <circle r="100" fill="url(#ballSheen)"/>
+    <!-- Pentágonos negros del balón -->
+    <polygon points="0,-90 -52,-50 -32,12 32,12 52,-50"
+             fill="#0a0a0a" transform="scale(0.6)"/>
+    <polygon points="-70,-10 -90,40 -55,75 -25,55 -35,5"
+             fill="#0a0a0a" transform="scale(0.6)"/>
+    <polygon points="70,-10 90,40 55,75 25,55 35,5"
+             fill="#0a0a0a" transform="scale(0.6)"/>
+    <polygon points="-30,55 -10,90 20,90 35,55 5,40"
+             fill="#0a0a0a" transform="scale(0.6)"/>
+  </g>
+
+  <!-- Texto 2026 abajo -->
+  <text x="256" y="475" font-family="-apple-system, system-ui, Arial Black, sans-serif"
+        font-size="68" font-weight="900" fill="white" text-anchor="middle"
+        letter-spacing="2">2026</text>
+</svg>

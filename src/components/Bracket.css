@@ -1,0 +1,142 @@
+.bracket-scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 16px 8px;
+  background: #f5f7fb;
+}
+
+.bracket-grid {
+  display: grid;
+  grid-template-columns: 200px 200px 200px 200px 220px;
+  gap: 18px;
+  min-width: 1040px;
+}
+
+.bracket-col-titulo {
+  text-align: center;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 12px;
+  letter-spacing: 1px;
+  color: var(--ion-color-primary);
+  margin-bottom: 10px;
+  padding: 6px;
+  background: white;
+  border-radius: 6px;
+  position: sticky;
+  top: 0;
+}
+
+.bracket-matches {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Espaciado vertical: cada fase tiene más espacio entre matches (forma de bracket) */
+.col-r32 .bracket-matches      { gap: 8px; }
+.col-octavos .bracket-matches  { gap: 56px; padding-top: 28px; }
+.col-cuartos .bracket-matches  { gap: 160px; padding-top: 80px; }
+.col-semis .bracket-matches    { gap: 368px; padding-top: 184px; }
+.col-final .bracket-matches    { padding-top: 388px; }
+
+.bracket-match {
+  background: white;
+  border-radius: 8px;
+  padding: 6px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  border-left: 3px solid var(--ion-color-primary);
+  position: relative;
+}
+
+.col-final .bracket-match {
+  border-left: 3px solid var(--ion-color-warning);
+  background: linear-gradient(135deg, #fffbe6 0%, #fff 100%);
+}
+
+.bracket-team {
+  display: grid;
+  grid-template-columns: 24px 1fr auto;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 6px;
+  border-radius: 4px;
+  font-size: 13px;
+}
+
+.bracket-team + .bracket-team {
+  border-top: 1px solid var(--ion-color-light);
+}
+
+.bracket-team.ganador {
+  background: rgba(45, 211, 111, 0.12);
+  font-weight: 700;
+}
+
+.bracket-flag {
+  font-size: 18px;
+}
+
+.bracket-nombre {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.bracket-gol {
+  font-weight: 700;
+  color: var(--ion-color-primary);
+  min-width: 16px;
+  text-align: center;
+}
+
+.bracket-meta {
+  font-size: 9px;
+  color: var(--ion-color-medium);
+  text-align: center;
+  margin-top: 4px;
+}
+
+/* Tabla de grupos */
+.grupos-tabla {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 12px;
+  padding: 12px;
+}
+
+.grupo-card {
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+}
+
+.grupo-card-titulo {
+  background: var(--ion-color-primary);
+  color: white;
+  padding: 8px 12px;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.grupo-card-equipo {
+  display: grid;
+  grid-template-columns: 24px 1fr repeat(4, 24px);
+  gap: 6px;
+  padding: 6px 12px;
+  font-size: 12px;
+  align-items: center;
+  border-bottom: 1px solid var(--ion-color-light);
+}
+
+.grupo-card-headers {
+  font-weight: 700;
+  font-size: 10px;
+  color: var(--ion-color-medium);
+  background: var(--ion-color-light);
+  text-transform: uppercase;
+}
+
+.grupo-card-equipo .pts {
+  font-weight: 700;
+  color: var(--ion-color-primary);
+}

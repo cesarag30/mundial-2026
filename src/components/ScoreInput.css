@@ -1,0 +1,43 @@
+.score-input {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.score-side {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.score-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1px solid var(--ion-color-primary);
+  background: white;
+  color: var(--ion-color-primary);
+  font-size: 16px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.score-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.score-value {
+  font-weight: 700;
+  font-size: 20px;
+  min-width: 22px;
+  text-align: center;
+}
+
+.score-sep {
+  font-weight: 700;
+  color: var(--ion-color-medium);
+  font-size: 18px;
+}

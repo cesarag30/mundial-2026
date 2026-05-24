@@ -1,0 +1,71 @@
+/* Tema visual del Mundial 2026
+   Colores inspirados en los países sede: USA (azul), Canadá (rojo), México (verde) */
+
+:root {
+  /* Primario: azul Mundial */
+  --ion-color-primary: #1a237e;
+  --ion-color-primary-rgb: 26, 35, 126;
+  --ion-color-primary-contrast: #ffffff;
+  --ion-color-primary-contrast-rgb: 255, 255, 255;
+  --ion-color-primary-shade: #171f6f;
+  --ion-color-primary-tint: #31398b;
+
+  /* Secundario: verde México */
+  --ion-color-secondary: #006847;
+  --ion-color-secondary-rgb: 0, 104, 71;
+  --ion-color-secondary-contrast: #ffffff;
+  --ion-color-secondary-contrast-rgb: 255, 255, 255;
+  --ion-color-secondary-shade: #005c3e;
+  --ion-color-secondary-tint: #1a7859;
+
+  /* Terciario: rojo Canadá */
+  --ion-color-tertiary: #d52b1e;
+  --ion-color-tertiary-rgb: 213, 43, 30;
+  --ion-color-tertiary-contrast: #ffffff;
+  --ion-color-tertiary-contrast-rgb: 255, 255, 255;
+  --ion-color-tertiary-shade: #bb261a;
+  --ion-color-tertiary-tint: #d94035;
+
+  --ion-color-success: #2dd36f;
+  --ion-color-warning: #ffc409;
+  --ion-color-danger: #eb445a;
+  --ion-color-dark: #222428;
+  --ion-color-medium: #92949c;
+  --ion-color-light: #f4f5f8;
+
+  /* Tipografía */
+  --ion-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+}
+
+/* Encabezado del Mundial con degradado */
+ion-toolbar.toolbar-mundial {
+  --background: linear-gradient(135deg, #1a237e 0%, #006847 50%, #d52b1e 100%);
+  --color: #ffffff;
+}
+
+/* Tarjetas de partidos */
+.match-card {
+  border-radius: 12px;
+  margin: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Banderas grandes */
+.flag-large {
+  font-size: 48px;
+  line-height: 1;
+}
+
+.flag-medium {
+  font-size: 28px;
+  line-height: 1;
+}
+
+/* Modo oscuro */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ion-background-color: #121212;
+    --ion-text-color: #ffffff;
+  }
+}

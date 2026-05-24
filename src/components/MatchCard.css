@@ -1,0 +1,109 @@
+.match-card-row {
+  --inner-padding-end: 8px;
+}
+
+.match-card-content {
+  width: 100%;
+  padding: 8px 0;
+}
+
+.match-card-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+  font-size: 12px;
+}
+
+.fase-badge {
+  font-size: 10px;
+  --padding-start: 6px;
+  --padding-end: 6px;
+}
+
+.equipos-row {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 8px;
+}
+
+.equipo-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.equipo-info ion-label h3 {
+  font-weight: 600;
+  font-size: 15px;
+  margin: 0;
+}
+
+.equipo-visitante {
+  justify-content: flex-end;
+  flex-direction: row;
+}
+
+.equipo-visitante ion-label h3 {
+  text-align: right;
+}
+
+.marcador {
+  font-weight: 700;
+  font-size: 18px;
+  text-align: center;
+  min-width: 72px;
+  padding: 6px 10px;
+  border-radius: 8px;
+  background: var(--ion-color-light);
+}
+
+.marcador-oficial {
+  color: var(--ion-color-primary);
+}
+
+.marcador-usuario {
+  color: var(--ion-color-tertiary);
+  font-style: italic;
+}
+
+.marcador-vs {
+  color: var(--ion-color-medium);
+  font-size: 14px;
+}
+
+.marcador-en-vivo {
+  color: var(--ion-color-danger) !important;
+  animation: pulso-vivo 1.5s ease-in-out infinite;
+}
+
+.en-vivo-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  background: var(--ion-color-danger);
+  border-radius: 50%;
+  animation: pulso-vivo 1.2s ease-in-out infinite;
+}
+
+@keyframes pulso-vivo {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+.fecha-bloque {
+  background: var(--ion-color-primary);
+  color: white;
+  padding: 10px 16px;
+  font-weight: 600;
+  text-transform: capitalize;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.filtro-fase {
+  padding: 8px;
+  background: var(--ion-color-light);
+}

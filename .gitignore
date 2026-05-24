@@ -1,0 +1,31 @@
+# Dependencias
+node_modules/
+.pnp
+.pnp.js
+
+# Build
+/build
+/dist
+/www
+
+# Capacitor / nativo
+/android
+/ios
+.gradle/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Editor
+.vscode/
+.idea/
+.DS_Store
+.claude/
+
+# Entorno (NUNCA commitear .env.local con API keys)
+.env
+.env.local
+.env.*.local
+!.env.example

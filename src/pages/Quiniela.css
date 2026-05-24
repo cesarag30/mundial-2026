@@ -1,0 +1,165 @@
+.puntos-resumen {
+  background: linear-gradient(135deg, var(--ion-color-primary) 0%, var(--ion-color-tertiary) 100%);
+  color: white;
+  padding: 20px 16px;
+  text-align: center;
+}
+
+.puntos-total {
+  margin-bottom: 12px;
+}
+
+.puntos-num {
+  font-size: 56px;
+  font-weight: 800;
+  line-height: 1;
+  display: block;
+}
+
+.puntos-label {
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  opacity: 0.9;
+}
+
+.puntos-detalle {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  font-size: 12px;
+}
+
+.puntos-detalle > div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.puntos-detalle strong {
+  font-size: 22px;
+}
+
+.puntos-detalle span {
+  opacity: 0.85;
+  font-size: 10px;
+  text-transform: uppercase;
+}
+
+.quiniela-reglas {
+  padding: 10px 16px;
+  font-size: 12px;
+  color: var(--ion-color-medium);
+  background: var(--ion-color-light);
+  border-left: 3px solid var(--ion-color-warning);
+}
+
+.quiniela-item {
+  --inner-padding-end: 0;
+  --padding-start: 0;
+}
+
+.quiniela-row {
+  width: 100%;
+  padding: 12px 16px;
+}
+
+.quiniela-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.fase-tag {
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 10px;
+  background: var(--ion-color-primary);
+  color: white;
+  font-weight: 600;
+}
+
+.quiniela-equipos {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+}
+
+.equipo-line {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+}
+
+.equipo-visitante {
+  justify-content: flex-end;
+}
+
+.quiniela-marcadores {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  padding: 8px 0;
+}
+
+.marcador-bloque {
+  border-radius: 8px;
+  padding: 8px;
+  text-align: center;
+}
+
+.tu-marcador {
+  background: rgba(213, 43, 30, 0.08);
+  border: 1px dashed var(--ion-color-tertiary);
+}
+
+.marcador-real {
+  background: rgba(26, 35, 126, 0.08);
+  border: 1px solid var(--ion-color-primary);
+}
+
+.marcador-titulo {
+  font-size: 11px;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  color: var(--ion-color-medium);
+}
+
+.oficial-num {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--ion-color-primary);
+}
+
+.oficial-pendiente {
+  font-size: 22px;
+  color: var(--ion-color-medium);
+}
+
+.puntos-partido {
+  margin-top: 8px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.puntos-3 {
+  background: var(--ion-color-success);
+  color: white;
+}
+
+.puntos-1 {
+  background: var(--ion-color-warning);
+  color: var(--ion-color-dark);
+}
+
+.puntos-0 {
+  background: var(--ion-color-light);
+  color: var(--ion-color-danger);
+}

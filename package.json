@@ -1,0 +1,58 @@
+{
+  "name": "mundial-2026",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "@ionic/react": "^8.4.0",
+    "@ionic/react-router": "^8.4.0",
+    "@ionic/pwa-elements": "^3.3.0",
+    "@capacitor/core": "^6.1.2",
+    "@capacitor/ios": "^6.1.2",
+    "@capacitor/android": "^6.1.2",
+    "ionicons": "^7.4.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router": "^5.3.4",
+    "react-router-dom": "^5.3.4",
+    "react-scripts": "5.0.1"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^6.1.2",
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "@types/react-router": "^5.1.20",
+    "@types/react-router-dom": "^5.3.3",
+    "typescript": "^4.9.5"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "simular": "node scripts/simular-mundial.mjs",
+    "borrar-simulacion": "rm -f public/simulacion.json && echo 'Simulación borrada. Recarga la app.'",
+    "iconos": "npm install --no-save sharp && node scripts/generar-iconos.mjs",
+    "android": "bash scripts/build-android.sh",
+    "android:release": "bash scripts/build-android.sh release",
+    "android:limpio": "bash scripts/build-android.sh limpio",
+    "android:abrir": "npx cap open android"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

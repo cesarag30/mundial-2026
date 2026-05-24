@@ -1,0 +1,108 @@
+name: Build Android APK
+
+# Cuándo se dispara este workflow
+on:
+  # Cada vez que empujas a main → genera APK debug
+  push:
+    branches: [main, master]
+  # Manualmente desde la pestaña "Actions" de GitHub
+  workflow_dispatch:
+  # Cuando creas un tag tipo v1.0.0 → genera APK release firmado
+  push_tags:
+    tags: ['v*']
+
+jobs:
+  build:
+    name: Compilar APK
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      # 1. Descargar el código del repo
+      - name: Checkout código
+        uses: actions/checkout@v4
+
+      # 2. Instalar Node.js 20
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      # 3. Instalar Java 17 (necesario para Android Gradle Plugin)
+      - name: Setup JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      # 4. Cachear el SDK de Android para builds más rápidos
+      - name: Cache Gradle
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: gradle-${{ runner.os }}-${{ hashFiles('**/*.gradle*') }}
+          restore-keys: gradle-${{ runner.os }}-
+
+      # 5. Instalar SDK de Android (no necesita Android Studio)
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+
+      # 6. Instalar dependencias de Node
+      - name: npm install
+        run: npm ci --legacy-peer-deps
+
+      # 7. Compilar la app React
+      - name: Build React
+        run: npm run build
+
+      # 8. Añadir plataforma Android (si no existe)
+      - name: Capacitor add Android
+        run: |
+          if [ ! -d "android" ]; then
+            npx cap add android
+          fi
+
+      # 9. Sincronizar assets web → proyecto Android nativo
+      - name: Capacitor sync
+        run: npx cap sync android
+
+      # 10. Generar el APK con Gradle
+      - name: Build APK (debug)
+        if: "!startsWith(github.ref, 'refs/tags/')"
+        working-directory: android
+        run: ./gradlew assembleDebug --no-daemon
+
+      - name: Build APK (release)
+        if: "startsWith(github.ref, 'refs/tags/')"
+        working-directory: android
+        run: ./gradlew assembleRelease --no-daemon
+
+      # 11. Subir el APK como artefacto descargable
+      - name: Upload APK debug
+        if: "!startsWith(github.ref, 'refs/tags/')"
+        uses: actions/upload-artifact@v4
+        with:
+          name: mundial-2026-debug-apk
+          path: android/app/build/outputs/apk/debug/app-debug.apk
+          retention-days: 30
+
+      - name: Upload APK release
+        if: "startsWith(github.ref, 'refs/tags/')"
+        uses: actions/upload-artifact@v4
+        with:
+          name: mundial-2026-release-apk
+          path: android/app/build/outputs/apk/release/app-release-unsigned.apk
+          retention-days: 90
+
+      # 12. (Solo en tags) Crear release en GitHub
+      - name: Crear Release
+        if: "startsWith(github.ref, 'refs/tags/')"
+        uses: softprops/action-gh-release@v2
+        with:
+          files: android/app/build/outputs/apk/release/app-release-unsigned.apk
+          generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

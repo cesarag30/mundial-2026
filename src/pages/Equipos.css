@@ -1,0 +1,85 @@
+.equipos-intro {
+  padding: 16px;
+  text-align: center;
+  color: var(--ion-color-medium);
+  font-size: 14px;
+}
+
+.grupo-header {
+  background: linear-gradient(90deg, var(--ion-color-primary) 0%, var(--ion-color-secondary) 100%);
+  color: white;
+  border-radius: 8px 8px 0 0;
+}
+
+.grupo-header ion-label h2 {
+  color: white !important;
+  font-weight: 700;
+  margin: 0;
+}
+
+.plantilla-grupo-header {
+  background: var(--ion-color-light);
+  font-weight: 600;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--ion-color-primary);
+}
+
+.jugador-dorsal {
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  line-height: 32px;
+  text-align: center;
+  border-radius: 50%;
+  background: var(--ion-color-primary);
+  color: white;
+  font-weight: 700;
+  font-size: 14px;
+  margin-right: 12px;
+}
+
+.jugador-capitan {
+  background: var(--ion-color-warning);
+  color: var(--ion-color-dark);
+}
+
+.equipo-portada {
+  background: linear-gradient(135deg, var(--ion-color-primary) 0%, var(--ion-color-secondary) 100%);
+  color: white;
+  padding: 24px 16px;
+  text-align: center;
+}
+
+.equipo-portada .flag-large {
+  font-size: 72px;
+}
+
+.equipo-portada h1 {
+  margin: 12px 0 4px;
+  font-size: 26px;
+  font-weight: 700;
+}
+
+.equipo-portada .apodo {
+  font-style: italic;
+  opacity: 0.9;
+  margin: 0;
+}
+
+.equipo-portada .meta {
+  margin-top: 12px;
+  font-size: 13px;
+  opacity: 0.85;
+}
+
+.aviso-plantilla-parcial {
+  padding: 12px 16px;
+  margin: 12px;
+  border-radius: 8px;
+  background: rgba(255, 196, 9, 0.1);
+  border-left: 4px solid var(--ion-color-warning);
+  font-size: 13px;
+  color: var(--ion-color-dark);
+}

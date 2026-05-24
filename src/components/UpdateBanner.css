@@ -1,0 +1,17 @@
+.update-banner {
+  display: flex;
+  justify-content: center;
+  padding: 6px 8px;
+  background: var(--ion-color-light);
+}
+
+.update-banner ion-chip {
+  cursor: pointer;
+  font-size: 12px;
+  margin: 0;
+}
+
+.update-banner-offline ion-chip {
+  cursor: default;
+  opacity: 0.7;
+}
