@@ -10,6 +10,7 @@
     "@capacitor/ios": "^6.1.2",
     "@capacitor/android": "^6.1.2",
     "ionicons": "^7.4.0",
+    "ajv": "^8.12.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router": "^5.3.4",
