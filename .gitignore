@@ -8,6 +8,9 @@ node_modules/
 /dist
 /www
 
+# Output del simulador (no debe versionarse — el usuario lo regenera con `npm run simular`)
+/public/simulacion.json
+
 # Capacitor / nativo
 /android
 /ios
