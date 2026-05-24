@@ -70,11 +70,37 @@ jobs:
 
       # 7. Compilar la app React
       # CI=false evita que react-scripts trate warnings como errores
-      # (comportamiento por defecto de Create React App en CI)
       - name: Build React
-        run: CI=false npm run build
+        run: |
+          set +e
+          CI=false npm run build 2>&1 | tee /tmp/build.log
+          EXIT=${PIPESTATUS[0]}
+          if [ $EXIT -ne 0 ]; then
+            echo ""
+            echo "::group::❌ ÚLTIMAS 80 LÍNEAS DEL ERROR"
+            tail -80 /tmp/build.log
+            echo "::endgroup::"
+            {
+              echo "## ❌ Build React falló"
+              echo ""
+              echo "### Últimas 80 líneas:"
+              echo '```'
+              tail -80 /tmp/build.log
+              echo '```'
+            } >> $GITHUB_STEP_SUMMARY
+          fi
+          exit $EXIT
         env:
           GENERATE_SOURCEMAP: false
+
+      # 7b. Subir el log siempre, para poder revisarlo aunque falle
+      - name: Upload build log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-react-log
+          path: /tmp/build.log
+          retention-days: 7
 
       # 8. Añadir plataforma Android (si no existe)
       - name: Capacitor add Android
