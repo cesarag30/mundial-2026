@@ -1,6 +1,8 @@
 import {
+  IonButton,
   IonContent,
   IonHeader,
+  IonIcon,
   IonItem,
   IonLabel,
   IonList,
@@ -11,14 +13,19 @@ import {
   IonTitle,
   IonToolbar,
 } from '@ionic/react';
+import { personAdd, podium, shareSocial } from 'ionicons/icons';
+import { useHistory } from 'react-router';
 import { useState } from 'react';
 import { obtenerEquipo } from '../data/teams';
 import { obtenerSede } from '../data/sedes';
 import { partidos, ETIQUETAS_FASE } from '../data/matches';
 import { useQuiniela } from '../context/QuinielaContext';
 import { useLiveData } from '../context/LiveDataContext';
+import { useAmigos } from '../context/AmigosContext';
 import ScoreInput from '../components/ScoreInput';
 import UpdateBanner from '../components/UpdateBanner';
+import CompartirQuiniela from '../components/CompartirQuiniela';
+import ImportarAmigoModal from '../components/ImportarAmigoModal';
 import './Quiniela.css';
 
 type Filtro = 'PROXIMOS' | 'JUGADOS' | 'TODOS';
@@ -26,7 +33,10 @@ type Filtro = 'PROXIMOS' | 'JUGADOS' | 'TODOS';
 const Quiniela: React.FC = () => {
   const { predicciones, guardarPrediccion, desglose, puntosDe } = useQuiniela();
   const { marcadorDe, marcadorVivo } = useLiveData();
+  const { miNombre, miPosicion, ranking } = useAmigos();
+  const history = useHistory();
   const [filtro, setFiltro] = useState<Filtro>('TODOS');
+  const [importarOpen, setImportarOpen] = useState(false);
 
   const lista = partidos.filter((p) => {
     const tieneMarcador = !!marcadorDe(p);
@@ -62,6 +72,31 @@ const Quiniela: React.FC = () => {
         <div className="quiniela-reglas">
           <strong>Reglas:</strong> 3 puntos por marcador exacto · 1 punto por
           acertar ganador o empate · 0 puntos si fallas.
+        </div>
+
+        {/* Social: compartir, ranking, importar */}
+        <div className="quiniela-social">
+          {miNombre && ranking.length > 1 && (
+            <IonButton
+              expand="block"
+              color="warning"
+              onClick={() => history.push('/quiniela/ranking')}
+            >
+              <IonIcon icon={podium} slot="start" />
+              Estás #{miPosicion} de {ranking.length} amigos
+            </IonButton>
+          )}
+          <div className="quiniela-social-row">
+            <CompartirQuiniela modo="whatsapp" />
+            <IonButton
+              expand="block"
+              fill="outline"
+              onClick={() => setImportarOpen(true)}
+            >
+              <IonIcon icon={personAdd} slot="start" />
+              Importar
+            </IonButton>
+          </div>
         </div>
 
         <IonSegment value={filtro} onIonChange={(e) => setFiltro(e.detail.value as Filtro)}>
@@ -148,6 +183,11 @@ const Quiniela: React.FC = () => {
           })}
         </IonList>
       </IonContent>
+
+      <ImportarAmigoModal
+        isOpen={importarOpen}
+        onClose={() => setImportarOpen(false)}
+      />
     </IonPage>
   );
 };

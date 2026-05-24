@@ -54,6 +54,20 @@
   border-left: 3px solid var(--ion-color-warning);
 }
 
+.quiniela-social {
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: linear-gradient(180deg, rgba(0,0,0,0.02), transparent);
+}
+
+.quiniela-social-row {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 8px;
+}
+
 .quiniela-item {
   --inner-padding-end: 0;
   --padding-start: 0;

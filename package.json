@@ -10,6 +10,8 @@
     "@capacitor/core": "^6.1.2",
     "@capacitor/ios": "^6.1.2",
     "@capacitor/android": "^6.1.2",
+    "@capacitor/share": "^6.0.3",
+    "@capacitor/clipboard": "^6.0.2",
     "ionicons": "^7.4.0",
     "ajv": "^8.12.0",
     "react": "^18.2.0",

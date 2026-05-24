@@ -18,9 +18,12 @@ import Calendario from './pages/Calendario';
 import Quiniela from './pages/Quiniela';
 import Torneo from './pages/Torneo';
 import Campeon from './pages/Campeon';
+import Ranking from './pages/Ranking';
 
 import { LiveDataProvider } from './context/LiveDataContext';
 import { QuinielaProvider } from './context/QuinielaContext';
+import { AmigosProvider } from './context/AmigosContext';
+import NombrePrompt from './components/NombrePrompt';
 
 import '@ionic/react/css/core.css';
 import '@ionic/react/css/normalize.css';
@@ -39,41 +42,44 @@ setupIonicReact();
 
 const App: React.FC = () => (
   <IonApp>
-    {/* LiveDataProvider envuelve a QuinielaProvider porque la quiniela depende de los marcadores en vivo */}
     <LiveDataProvider>
       <QuinielaProvider>
-        <IonReactRouter>
-          <IonTabs>
-            <IonRouterOutlet>
-              <Route exact path="/equipos" component={Equipos} />
-              <Route exact path="/equipos/:codigo" component={EquipoDetalle} />
-              <Route exact path="/calendario" component={Calendario} />
-              <Route exact path="/quiniela" component={Quiniela} />
-              <Route exact path="/torneo" component={Torneo} />
-              <Route exact path="/campeon" component={Campeon} />
-              <Route exact path="/"><Redirect to="/equipos" /></Route>
-            </IonRouterOutlet>
+        <AmigosProvider>
+          <NombrePrompt />
+          <IonReactRouter>
+            <IonTabs>
+              <IonRouterOutlet>
+                <Route exact path="/equipos" component={Equipos} />
+                <Route exact path="/equipos/:codigo" component={EquipoDetalle} />
+                <Route exact path="/calendario" component={Calendario} />
+                <Route exact path="/quiniela" component={Quiniela} />
+                <Route exact path="/quiniela/ranking" component={Ranking} />
+                <Route exact path="/torneo" component={Torneo} />
+                <Route exact path="/campeon" component={Campeon} />
+                <Route exact path="/"><Redirect to="/equipos" /></Route>
+              </IonRouterOutlet>
 
-            <IonTabBar slot="bottom">
-              <IonTabButton tab="equipos" href="/equipos">
-                <IonIcon icon={football} />
-                <IonLabel>Equipos</IonLabel>
-              </IonTabButton>
-              <IonTabButton tab="calendario" href="/calendario">
-                <IonIcon icon={calendar} />
-                <IonLabel>Calendario</IonLabel>
-              </IonTabButton>
-              <IonTabButton tab="quiniela" href="/quiniela">
-                <IonIcon icon={podium} />
-                <IonLabel>Quiniela</IonLabel>
-              </IonTabButton>
-              <IonTabButton tab="torneo" href="/torneo">
-                <IonIcon icon={trophy} />
-                <IonLabel>Torneo</IonLabel>
-              </IonTabButton>
-            </IonTabBar>
-          </IonTabs>
-        </IonReactRouter>
+              <IonTabBar slot="bottom">
+                <IonTabButton tab="equipos" href="/equipos">
+                  <IonIcon icon={football} />
+                  <IonLabel>Equipos</IonLabel>
+                </IonTabButton>
+                <IonTabButton tab="calendario" href="/calendario">
+                  <IonIcon icon={calendar} />
+                  <IonLabel>Calendario</IonLabel>
+                </IonTabButton>
+                <IonTabButton tab="quiniela" href="/quiniela">
+                  <IonIcon icon={podium} />
+                  <IonLabel>Quiniela</IonLabel>
+                </IonTabButton>
+                <IonTabButton tab="torneo" href="/torneo">
+                  <IonIcon icon={trophy} />
+                  <IonLabel>Torneo</IonLabel>
+                </IonTabButton>
+              </IonTabBar>
+            </IonTabs>
+          </IonReactRouter>
+        </AmigosProvider>
       </QuinielaProvider>
     </LiveDataProvider>
   </IonApp>
