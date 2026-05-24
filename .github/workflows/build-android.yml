@@ -69,7 +69,11 @@ jobs:
           fi
 
       # 7. Compilar la app React
-      # CI=false evita que react-scripts trate warnings como errores
+      # - CI=false evita que warnings rompan la build
+      # - REACT_APP_FOOTBALL_API_KEY se lee del GitHub Secret y se INCRUSTA
+      #   en el bundle JS en tiempo de compilación (así el APK funciona offline
+      #   sin necesidad de que el usuario configure nada)
+      # - Si el secret no existe, la app cae en "Modo sin conexión" automáticamente
       - name: Build React
         run: |
           set +e
@@ -89,9 +93,17 @@ jobs:
               echo '```'
             } >> $GITHUB_STEP_SUMMARY
           fi
+          # Mensaje informativo sobre la API
+          if [ -n "$REACT_APP_FOOTBALL_API_KEY" ]; then
+            echo "✓ APK construida con API key (auto-actualización activa)"
+          else
+            echo "ℹ️ APK sin API key — la app usará datos estáticos. Configura el secret FOOTBALL_API_KEY para activar la API en vivo."
+          fi
           exit $EXIT
         env:
           GENERATE_SOURCEMAP: false
+          REACT_APP_FOOTBALL_API_KEY: ${{ secrets.FOOTBALL_API_KEY }}
+          REACT_APP_RESULTS_JSON_URL: ${{ secrets.RESULTS_JSON_URL }}
 
       # 7b. Subir el log siempre, para poder revisarlo aunque falle
       - name: Upload build log
