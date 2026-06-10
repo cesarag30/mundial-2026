@@ -1,9 +1,7 @@
 /**
  * Punto de acceso unificado a las plantillas convocadas.
- * - 16 selecciones top: plantilla completa de 26 jugadores.
- * - 32 selecciones restantes: 11 titulares proyectados.
- *
- * Las plantillas oficiales se anunciarán entre el 1 y el 6 de junio de 2026.
+ * Las 48 selecciones tienen su convocatoria oficial del Mundial 2026 (26 jugadores).
+ * Listas anunciadas por las federaciones entre el 1 y el 6 de junio de 2026.
  */
 
 import { plantillasTop, type Jugador, type Posicion } from './squads-top';
