@@ -140,3 +140,14 @@
   font-weight: 700;
   color: var(--ion-color-primary);
 }
+
+/* Top-2 del grupo (clasificados directos a eliminatorias) */
+.grupo-card-equipo.fila-clasificado {
+  background: rgba(45, 211, 111, 0.07);
+}
+
+.grupo-card-subtitulo {
+  font-weight: 400;
+  font-size: 11px;
+  opacity: 0.85;
+}
